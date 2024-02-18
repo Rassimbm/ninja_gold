@@ -48,12 +48,18 @@
             </form>
         </div>
         <h5 class="mt-3">Activities:</h5>
-        <div class="container bg-secondary-subtle p-3 rounded">
+        <div class="container bg-secondary-subtle mt-3 rounded">
             {%for activity in activities%}
                 <p class="{{activity.class}}">{{activity.message}}</p>
             {%endfor%}
         </div>
-        <a href="reset-game" class="btn bg-warning mt-3">Reset</a>
+        {%if session["win"]%}
+            <h5 class="text-center text-success mt-3">Congratulation! You won 500 golds!</h5>
+            <a href="reset-game" class="btn bg-warning mt-3">Reset</a>
+        {%elif session["lose"]%}
+            <h5 class="text-center text-danger mt-3">You lost!</h5>
+            <a href="reset-game" class="btn bg-warning mt-3">Reset</a>
+        {%endif%}
     </div>
 
 </body>

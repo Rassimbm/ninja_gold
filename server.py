@@ -30,6 +30,11 @@ def process_money():
     else:
         session["activities"].insert(0, {"message": f"You earned {earning} golds from the {location}! {time_stamp}", "class": "win"})
 
+    if session["gold"] >= 500 and len(session["activities"]) <= 15:
+        session["win"] = True
+    elif len(session["activities"]) >= 15:
+        session["lose"] = True
+
     session["gold"] += earning
     return redirect("/")
 
