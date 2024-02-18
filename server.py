@@ -22,6 +22,13 @@ def process_money():
     }
     location = request.form["location"]
     earning = random.randint(locations[location]["min"], locations[location]["max"])
+    time_stamp = datetime.now().strftime("%Y/%m/%d %I:%M %p")
+
+    if earning < 0:
+        session["activities"].append({"message": f"You entered {location} and lost {abs(earning)} golds... Ouch... {time_stamp}", "class": "loss"})
+    else:
+        session["activities"].append({"message": f"You earned {earning} golds from {location}! {time_stamp}", "class": "win"})
+
     session["gold"] += earning
     return redirect("/")
 
