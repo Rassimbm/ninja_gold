@@ -25,11 +25,16 @@ def process_money():
     time_stamp = datetime.now().strftime("%Y/%m/%d %I:%M %p")
 
     if earning < 0:
-        session["activities"].append({"message": f"You entered {location} and lost {abs(earning)} golds... Ouch... {time_stamp}", "class": "loss"})
+        session["activities"].append({"message": f"You entered the {location} and lost {abs(earning)} golds... Ouch... {time_stamp}", "class": "loss"})
     else:
-        session["activities"].append({"message": f"You earned {earning} golds from {location}! {time_stamp}", "class": "win"})
+        session["activities"].append({"message": f"You earned {earning} golds from the {location}! {time_stamp}", "class": "win"})
 
     session["gold"] += earning
+    return redirect("/")
+
+@app.route("/reset-game")
+def reset_game():
+    session.clear()
     return redirect("/")
 
 if __name__ == ("__main__"):
